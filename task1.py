@@ -25,14 +25,14 @@ async def copy_file(file: AsyncPath, output_dir: AsyncPath):
             counter += 1
 
         await async_copy(file, target_file)
-        logging.info(f"✅ {file} скопирован в {target_file}")
+        logging.info(f"✅ {file} успішно скопійовано до {target_file}")
 
     except Exception as e:
-        logging.error(f"❌ Ошибка при копировании {file}: {e}")
+        logging.error(f"❌ Помилка під час копіювання {file}: {e}")
 
 async def read_and_copy(source_dir: AsyncPath, output_dir: AsyncPath):
     if not await source_dir.exists():
-        logging.error(f"❌ Исходная папка {source_dir} не существует")
+        logging.error(f"❌ Вихідна папка {source_dir} не існує")
         return
 
     tasks = []
@@ -43,9 +43,9 @@ async def read_and_copy(source_dir: AsyncPath, output_dir: AsyncPath):
     await asyncio.gather(*tasks)
 
 def main():
-    parser = ArgumentParser(description="Асинхронное сортирование файлов по расширениям")
-    parser.add_argument("source", type=str, help="Путь к исходной папке")
-    parser.add_argument("output", type=str, help="Путь к папке назначения")
+    parser = ArgumentParser(description="Асинхронне сортування файлів за розширенням")
+    parser.add_argument("source", type=str, help="Шлях до вихідної папки")
+    parser.add_argument("output", type=str, help="Шлях до папки призначення")
     args = parser.parse_args()
 
     source_dir = AsyncPath(args.source)
@@ -55,3 +55,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
